@@ -13,6 +13,13 @@ public class OrderService : IOrderService
         _orderRepository = orderRepository;
     }
 
+    /// <summary>
+    /// Places an order and saves it to db
+    /// </summary>
+    /// <param name="orderDto">Test</param>
+    /// <param name="cancellationToken"></param>
+    /// <returns>new entity of order</returns>
+    /// <exception cref="ArgumentException">validation error</exception>
     public async Task<Order> PlaceOrderAsync(AddOrderDto orderDto, CancellationToken cancellationToken)
     {
         if (string.IsNullOrEmpty(orderDto.Address))
