@@ -1,8 +1,8 @@
 ﻿using CafeApp;
 using CafeApp.Core.DTOs.Inputs;
-using CafeApp.Core.Models;
-using CafeApp.Storage;
 
+
+var logger = Dependency.GetLogger();
 
 while (true)
 {
@@ -34,12 +34,19 @@ while (true)
                 var order = await orderService.PlaceOrderAsync(dto, default);
                
                 Console.WriteLine($"Order #{order.Id} was placed. Delivery to {order.Address}");
+                logger.Information("Order {0} was placed", order.Id);
+            }
+            catch(ArgumentException ex)
+            {
+                Console.WriteLine($"Validation error: {ex.Message}");
+                logger.Error(ex.Message);
             }
             catch (Exception ex)
             {
-                // errors
+                Console.WriteLine(ex.Message);
+                logger.Error(ex.Message);
             }
-                break;
+            break;
     }
 }
 

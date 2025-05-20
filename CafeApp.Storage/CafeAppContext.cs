@@ -5,6 +5,18 @@ namespace CafeApp.Storage;
 
 public class CafeAppContext : DbContext
 {
+    private readonly string _connectionString;
+
+    public CafeAppContext()
+    {
+        
+    }
+
+    public CafeAppContext(string connectionString)
+    {
+        _connectionString = connectionString;
+    }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=CafeAppDB;Integrated Security=True");
